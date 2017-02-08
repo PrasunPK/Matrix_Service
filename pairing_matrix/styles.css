@@ -15,3 +15,23 @@
     margin: 1px;
     display: inline-block;
 }
+
+#vertical-identifiers{
+	margin-top: 52px;
+}
+
+.v-identifier{
+	height: 50px;
+	width: 50px;
+}
+
+#horizontal-identifiers{
+}
+
+.h-identifier{
+	float: left;
+	height: 50px;
+	width: 50px;
+    margin: 1px;
+    background-color: grey;
+}
