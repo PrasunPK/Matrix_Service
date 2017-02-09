@@ -1,5 +1,7 @@
 var names = ['A','B','C','D', 'E'];
+var copy_names = names;
 var dimension = names.length;
+
 $(document).ready(function() {
 	for(var y = 0; y <= dimension; y++) {
 		var unit;
@@ -22,5 +24,16 @@ $(document).ready(function() {
         	}
             unit.appendTo('#matrix');
         }
+    }
+
+    var left_side = copy_names.splice(0,dimension/2)
+    for(var i = 0; i < left_side.length; i++){
+        var unit = $("<li id="+ ('node'+(i+1)) +"> "+ left_side[i] +"</li>");
+        unit.appendTo('#allItems');
+    }
+    var right_side = copy_names;
+    for(var i = 0; i < right_side.length; i++){
+        var unit = $("<li id="+ ('Li'+(i+1)) +"> "+ right_side[i] +"</li>");
+        unit.appendTo('#Ul1');
     }
 });

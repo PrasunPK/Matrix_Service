@@ -1,31 +1,45 @@
- .ui-drop-hover{border:2px solid #bbb;} 
-#dragdiv li,#dropdiv li{border:1px solid #bbb;} 
-#dropdiv li{padding-left:10px;}
-#maindiv{width:500px;height:350px;border:2px solid #bbb;} 
-#allItems,#Ul1{list-style:none;} 
-#dragdiv,#dropdiv{width:180px;height:250px;float:left;}
+ .ui-drop-hover{
+ 	border:2px solid #bbb;
+}
+
+#dragdiv li,#dropdiv li{
+	border:1px solid #bbb;
+	padding: 10px;
+	margin-top: 5px;
+}
+
+#dropdiv li:hover, #dragdiv li:hover {
+	border-color: #00f;
+}
+
+#dropdiv li{
+	padding-left:10px;
+}
+
+#maindiv{
+	width:500px;
+	height:500px;
+	border:2px solid #bbb;
+}
+
+#allItems,#Ul1{
+	list-style:none;
+}
+
+#dragdiv,#dropdiv{
+	width:180px;height:250px;float:left;
+}
 
 #matrix { 
 	background-color: lightgray;
 }
+
 .unit {
     background-color: orange;
     height: 50px;
     width: 50px;
     margin: 1px;
     display: inline-block;
-}
-
-#vertical-identifiers{
-	margin-top: 52px;
-}
-
-.v-identifier{
-	height: 50px;
-	width: 50px;
-}
-
-#horizontal-identifiers{
 }
 
 .h-identifier{
