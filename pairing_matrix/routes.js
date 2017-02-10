@@ -37,4 +37,20 @@ app.post("^/add_member/names/:name$", function(req, res){
 	insert(req.params.name, res);
 });
 
+app.get("^/count$", function(req, res){
+	db.serialize(function() {
+		db.all("SELECT COUNT(*) as total_members FROM members", function(err, count) {
+			res.send({ count : count[0].total_members });
+		});
+	});
+});
+
+app.get("^/all_member_names$", function(req, res){
+	db.serialize(function() {
+		db.all("SELECT * FROM members where status = 'ACTIVE'", function(err, members) {
+			res.send(members);
+		});
+	});
+});
+
 module.exports = app;
