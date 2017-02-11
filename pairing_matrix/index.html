@@ -4,10 +4,10 @@
 <head>
     <title></title>
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
     <script src="http://code.jquery.com/ui/1.8.20/jquery-ui.min.js" type="text/javascript"></script>
+
     <script type="text/javascript" src="matrix.js" ></script>
-    <script type="text/javascript" src="drop.js" ></script>
     <script type="text/javascript" src="operations.js" ></script>
 </head>
 <body>
@@ -17,14 +17,15 @@
         <div id="matrix"></div>
     </div>
     <div id="maindiv">
+        <h3><span>Pairs</span></h3>
         <div id="dragdiv">
-            <ul id="allItems" >
+            <ul id="allItems" runat="server">
             </ul>
         </div>
          <div id="dropdiv">
-            <ul id="Ul1">
+             <ul id="Ul1" runat="server">
             </ul>
-        </div>
+         </div>
     </div>
     <div id="input-holder">
         <label> Add member : </label>
