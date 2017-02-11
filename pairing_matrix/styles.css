@@ -61,10 +61,22 @@
 }
 
 
-<style type="text/css">
-     .ui-drop-hover{border:2px solid #bbb;} 
-#dragdiv li,#dropdiv li{border:1px solid #bbb;} 
-#dropdiv li{padding-left:10px;}
-#allItems,#Ul1{list-style:none;} 
-#dragdiv,#dropdiv{width:180px;height:250px;float:left;}
-    </style>
+.ui-drop-hover{
+	border:2px solid #bbb;
+} 
+#dragdiv li,#dropdiv li{
+	margin-top: 3px;
+	border:1px solid #bbb;
+	padding: 15px;
+} 
+#dropdiv li{
+	padding-left:10px;
+}
+#allItems,#Ul1{
+	list-style:none;
+} 
+#dragdiv,#dropdiv{
+	width:180px;
+	height:250px;
+	float:left;
+}

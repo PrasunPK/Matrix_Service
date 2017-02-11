@@ -15,10 +15,16 @@ app.get("^/status$", function (req, res) {
     res.send({status:true});
 });
 
-var insert = function(name, res){
+var create_tables = function(){
 	db.serialize(function() {
 		db.run("CREATE TABLE IF NOT EXISTS members (name TEXT, status TEXT)");
+		db.run("CREATE TABLE IF NOT EXISTS pairs (first_pair TEXT, second_pair TEXT, days INTEGER)");
+	});
+};
+create_tables();
 
+var insert = function(name, res){
+	db.serialize(function() {
 		var stmt = db.prepare("INSERT INTO members VALUES (?, ?)");
 		stmt.run(name, 'ACTIVE');
 		stmt.finalize();
@@ -49,6 +55,14 @@ app.get("^/all_member_names$", function(req, res){
 	db.serialize(function() {
 		db.all("SELECT * FROM members where status = 'ACTIVE'", function(err, members) {
 			res.send(members);
+		});
+	});
+});
+
+app.get("^/pairs$", function(req, res){
+	db.serialize(function() {
+		db.all("SELECT * FROM pairs", function(err, pairs) {
+			res.send(pairs);
 		});
 	});
 });
