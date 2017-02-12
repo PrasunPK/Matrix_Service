@@ -18,7 +18,7 @@ app.get("^/status$", function (req, res) {
 var create_tables = function(){
 	db.serialize(function() {
 		db.run("CREATE TABLE IF NOT EXISTS members (name TEXT, status TEXT)");
-		db.run("CREATE TABLE IF NOT EXISTS pairs (first_pair TEXT, second_pair TEXT, days INTEGER)");
+		db.run("CREATE TABLE IF NOT EXISTS pairs (name TEXT)");
 	});
 };
 create_tables();
@@ -29,9 +29,15 @@ var insert = function(name, res){
 		stmt.run(name, 'ACTIVE');
 		stmt.finalize();
 
+		db.run("ALTER TABLE pairs ADD COLUMN "+ name +" INTEGER");
+		var stmt = db.prepare("INSERT INTO pairs (name) VALUES(?)");
+		stmt.run(name);
+		stmt.finalize();
+
 		db.all("SELECT COUNT(*) as total_members FROM members", function(err, count) {
+			console.log(count);
 			res.send({
-				count : count[0].total_members,
+				count : count && count[0].total_members || 0,
 				name: name,
 				status: 'ACTIVE'
 			});	
@@ -59,7 +65,7 @@ app.get("^/all_member_names$", function(req, res){
 	});
 });
 
-app.get("^/pairs$", function(req, res){
+app.get("^/matrix$", function(req, res){
 	db.serialize(function() {
 		db.all("SELECT * FROM pairs", function(err, pairs) {
 			res.send(pairs);
