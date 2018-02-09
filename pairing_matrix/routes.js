@@ -55,21 +55,38 @@ app.post("^/add_member/names/:name$", function(req, res){
 
 app.post("^/state/save$", function(req, res){
 	var pairs_list = req.body;
-	db.run("DELETE FROM pairs");
+	// db.run("DELETE FROM pairs");
 	for (var i = 0; i < Object.keys(pairs_list).length; i++) {
 		var first = pairs_list[i][0] == 'SOLO' ? null : pairs_list[i][0];
 		var second = pairs_list[i][1] == 'SOLO' ? null : pairs_list[i][1];
 
-		var stmt = db.prepare("INSERT INTO pairs VALUES (?, ?)");
-		stmt.run(first, second);
-		stmt.finalize();
+		console.log(first, second);
 
-		if(first != null )
-			db.run("UPDATE matrix SET " + first + "=? WHERE name= ? ",3,second);
-		if(second != null)
-			db.run("UPDATE matrix SET " + second + "=? WHERE name= ? ",3,first);
+		if(first != null){
+			try{
+				db.run("UPDATE pairs SET second=? WHERE first="+first, second);
+			}catch (err){
+				var stmt = db.prepare("INSERT INTO pairs VALUES(?, ?)");
+				stmt.run(first, second);
+				stmt.finalize();
+			}
+		}else{
+			try{
+				db.run("UPDATE pairs SET first=? WHERE second="+second, first);
+			}catch (err){
+				var stmt = db.prepare("INSERT INTO pairs VALUES(?, ?)");
+				stmt.run(first, second);
+				stmt.finalize();
+			}
+		}
+
+		// if(first != null )
+		// 	db.run("UPDATE matrix SET " + first + "=? WHERE name= ? ",3,second);
+		// if(second != null)
+		// 	db.run("UPDATE matrix SET " + second + "=? WHERE name= ? ",3,first);
 
 	}
+
 	res.send({status:true});
 });
 
